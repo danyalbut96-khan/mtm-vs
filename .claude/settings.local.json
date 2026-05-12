@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\khani\\\\mtm\\\\stitch_smartdoc_ai_healthcare_platform\" -Recurse -Directory)",
+      "Bash(Select-Object FullName)"
+    ]
+  }
+}
