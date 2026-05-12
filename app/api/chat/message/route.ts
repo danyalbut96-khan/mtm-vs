@@ -3,8 +3,6 @@ import { createClient } from '@/lib/supabase-server'
 import { anthropic } from '@/lib/anthropic'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(req: NextRequest) {
   try {
     const { doctor_id, message, patient_name, patient_phone, is_doctor_available, conversation_history } = await req.json()
@@ -53,25 +51,30 @@ Be concise, empathetic, and helpful. If asked about specific doctors, mention th
     const reply = response.content[0].type === 'text' ? response.content[0].text : 'I apologize, I could not process your message.'
 
     if (doctor_id) {
-      await supabase.from('messages').insert({
-        doctor_id,
-        sender_type: 'patient',
-        content: message,
-        patient_name,
-        patient_phone,
-      }).then(() => {}).catch(() => {})
+      try {
+        await supabase.from('messages').insert({
+          doctor_id,
+          sender_type: 'patient',
+          content: message,
+          patient_name,
+          patient_phone,
+        })
+      } catch {}
 
-      await supabase.from('messages').insert({
-        doctor_id,
-        sender_type: 'ai',
-        content: reply,
-      }).then(() => {}).catch(() => {})
+      try {
+        await supabase.from('messages').insert({
+          doctor_id,
+          sender_type: 'ai',
+          content: reply,
+        })
+      } catch {}
 
       const hasName = patient_name && patient_name.length > 0
       const hasPhone = patient_phone && patient_phone.length > 0
       const mightHaveInfo = message.match(/(\+?[\d\s-]{10,})/g)
 
-      if (!is_doctor_available && doctorEmail && (hasName || hasPhone || mightHaveInfo)) {
+      if (!is_doctor_available && doctorEmail && (hasName || hasPhone || mightHaveInfo) && process.env.RESEND_API_KEY) {
+        const resend = new Resend(process.env.RESEND_API_KEY)
         await resend.emails.send({
           from: 'SmartDoc AI <noreply@smartdocai.com>',
           to: doctorEmail,
