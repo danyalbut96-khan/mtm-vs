@@ -59,13 +59,13 @@ Be concise, empathetic, and helpful. If asked about specific doctors, mention th
         content: message,
         patient_name,
         patient_phone,
-      }).catch(() => {})
+      }).then(() => {}).catch(() => {})
 
       await supabase.from('messages').insert({
         doctor_id,
         sender_type: 'ai',
         content: reply,
-      }).catch(() => {})
+      }).then(() => {}).catch(() => {})
 
       const hasName = patient_name && patient_name.length > 0
       const hasPhone = patient_phone && patient_phone.length > 0

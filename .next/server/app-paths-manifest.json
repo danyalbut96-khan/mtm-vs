@@ -1,0 +1,22 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/ai/suggest-doctors/route": "app/api/ai/suggest-doctors/route.js",
+  "/api/chat/message/route": "app/api/chat/message/route.js",
+  "/api/doctors/[id]/availability/route": "app/api/doctors/[id]/availability/route.js",
+  "/api/appointments/book/route": "app/api/appointments/book/route.js",
+  "/api/doctors/[id]/route": "app/api/doctors/[id]/route.js",
+  "/api/doctors/me/route": "app/api/doctors/me/route.js",
+  "/api/auth/callback/route": "app/api/auth/callback/route.js",
+  "/api/doctors/register/route": "app/api/doctors/register/route.js",
+  "/api/doctors/search/route": "app/api/doctors/search/route.js",
+  "/auth/page": "app/auth/page.js",
+  "/chat/page": "app/chat/page.js",
+  "/booking/[doctorId]/page": "app/booking/[doctorId]/page.js",
+  "/dashboard/doctor/page": "app/dashboard/doctor/page.js",
+  "/dashboard/patient/page": "app/dashboard/patient/page.js",
+  "/doctors/register/page": "app/doctors/register/page.js",
+  "/doctors/[id]/page": "app/doctors/[id]/page.js",
+  "/search/page": "app/search/page.js",
+  "/page": "app/page.js",
+  "/api/appointments/route": "app/api/appointments/route.js"
+}

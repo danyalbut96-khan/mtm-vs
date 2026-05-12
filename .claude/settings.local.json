@@ -3,7 +3,10 @@
     "allow": [
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\khani\\\\mtm\\\\stitch_smartdoc_ai_healthcare_platform\" -Recurse -Directory)",
       "Bash(Select-Object FullName)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(cat /c/Users/khani/AppData/Local/Temp/claude/c--Users-khani-mtm/927b7a64-9827-427e-88c9-bbabd32c36c2/tasks/bqdyxqlrn.output)",
+      "Read(//c/Users/khani/AppData/Local/Temp/claude/c--Users-khani-mtm/927b7a64-9827-427e-88c9-bbabd32c36c2/tasks/**)",
+      "Bash(npm run *)"
     ]
   }
 }
