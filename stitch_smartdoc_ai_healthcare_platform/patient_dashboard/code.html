@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Patient Dashboard - SmartDoc AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-primary-fixed-variant": "#004493",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#727785",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#1a73e8",
+                        "outline-variant": "#c1c6d6",
+                        "tertiary-container": "#c55500",
+                        "on-tertiary-fixed-variant": "#783100",
+                        "surface-dim": "#d7dae0",
+                        "surface-variant": "#dfe3e8",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#89fa9b",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#9e4300",
+                        "on-surface-variant": "#414754",
+                        "surface-tint": "#005bc0",
+                        "secondary-fixed-dim": "#6ddd81",
+                        "surface-container-high": "#e5e8ee",
+                        "on-surface": "#181c20",
+                        "on-primary-fixed": "#001a41",
+                        "primary": "#005bbf",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#86f898",
+                        "inverse-on-surface": "#eef1f7",
+                        "on-secondary-fixed-variant": "#005320",
+                        "inverse-primary": "#adc7ff",
+                        "background": "#f7f9ff",
+                        "on-secondary-fixed": "#002108",
+                        "surface-container-low": "#f1f4fa",
+                        "on-background": "#181c20",
+                        "surface-bright": "#f7f9ff",
+                        "on-primary-container": "#ffffff",
+                        "surface-container-highest": "#dfe3e8",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#adc7ff",
+                        "secondary": "#006e2c",
+                        "surface-container": "#ebeef4",
+                        "inverse-surface": "#2d3135",
+                        "on-secondary-container": "#00722f",
+                        "surface": "#f7f9ff",
+                        "on-tertiary-container": "#0e0200",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed": "#341100",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "12px",
+                        "xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "1.5rem",
+                        "xs": "0.5rem",
+                        "sm": "1rem",
+                        "lg": "2.5rem",
+                        "gutter": "24px",
+                        "xl": "4rem",
+                        "base": "4px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-shadow-sm { shadow: 0px 2px 8px rgba(0, 0, 0, 0.05); }
+        .custom-shadow-md:hover { shadow: 0px 8px 20px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
+        .transition-standard { transition: all 200ms ease-in-out; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center h-[72px] px-gutter max-w-container-max mx-auto w-full">
+<div class="font-display-lg text-headline-md font-bold text-primary">SmartDoc AI</div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-standard font-body-md" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-standard font-body-md" href="#">Find Doctor</a>
+<a class="text-on-surface-variant hover:text-primary transition-standard font-body-md" href="#">For Doctors</a>
+</nav>
+<div class="flex items-center gap-sm">
+<div class="flex items-center gap-xs pr-md border-r border-outline-variant">
+<img alt="Patient" class="w-10 h-10 rounded-full border-2 border-primary-container" data-alt="A professional headshot of a friendly man in his 30s with a warm smile, set against a clean, softly blurred modern interior background. The lighting is bright and high-key, emphasizing a clinical yet accessible atmosphere. The overall style is modern and high-resolution, fitting a premium healthcare platform with soft blue and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjK_aInQnJEKtLQvRmdmiLqYQewTTz7zGXx_n2xCoL_rtcH1VP7CFKEQHxtpQ_cKuKscyFVZLn1McQZ_hmVSR1rL47AOt-HACC7ch43yxyMWrmxKWBtRFNqVlStNaeS6-3Cn4GIIg2t-uja--EKamejdpehG7JVuRKY0w4JOU7sN93F9Uv43mYDZ-HbUouAMPpyWjLy40oR1nDQaCdqNK2Zs-LqCH9mmHf3dn6dc4EYl8FDu_HJmrVAk9JuxUvUe8oyGpUlvW1OrU"/>
+<span class="font-label-sm hidden lg:block">Alex Johnson</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant">notifications</button>
+</div>
+</div>
+</header>
+<div class="max-w-container-max mx-auto px-gutter py-lg flex flex-col md:flex-row gap-lg">
+<!-- Sidebar Navigation -->
+<aside class="w-full md:w-64 flex-shrink-0">
+<nav class="flex flex-col gap-xs sticky top-24">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg bg-primary-container text-on-primary-container font-bold transition-standard" href="#">
+<span class="material-symbols-outlined" data-weight="fill">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-standard" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span>Appointments</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-standard" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span>Medical Records</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-standard" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span>Messages</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-standard" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Billing</span>
+</a>
+<hr class="my-sm border-outline-variant"/>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-standard" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col gap-lg">
+<!-- Welcome Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Welcome back, Alex</h1>
+<p class="text-on-surface-variant font-body-lg">You have 2 appointments scheduled for this week.</p>
+</div>
+<!-- Quick Search -->
+<div class="relative w-full md:w-80">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-[40px] pr-sm py-sm rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary transition-standard" placeholder="Find a symptom or doctor..." type="text"/>
+</div>
+</section>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-lg">
+<!-- Left Column: Upcoming & History -->
+<div class="xl:col-span-2 flex flex-col gap-lg">
+<!-- Upcoming Appointments -->
+<section>
+<div class="flex items-center justify-between mb-sm">
+<h2 class="font-headline-md text-headline-md">Upcoming Appointments</h2>
+<a class="text-primary font-label-sm flex items-center hover:underline" href="#">View all <span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-sm rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-standard flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="bg-primary-fixed text-on-primary-fixed px-xs py-[2px] rounded-full text-[12px] font-bold">In-Person</div>
+<span class="text-on-surface-variant font-label-sm">Oct 24, 10:00 AM</span>
+</div>
+<div class="flex items-center gap-sm">
+<img alt="Doctor" class="w-12 h-12 rounded-lg object-cover" data-alt="A portrait of a confident male doctor in a white clinical coat, wearing a stethoscope around his neck. He is standing in a brightly lit, high-tech medical facility with clean glass walls and soft blue lighting accents. The image conveys trust, expertise, and a modern healthcare environment, utilizing a sharp, professional photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpzaoPIw6udw5w1ldzQUCUtJGlemFS2j_OMhk3Dg_pgygnqIGi1tf6gykdfKfZt1T8S1wr_NNTwHP-LNL4jQa1iERpXXvSfJEWXuGTqwtF-BedqAicLd_8YG6wC8NaYkNP_P6Enot_8C6YXYnuq77m4l61L9hno-MnAINLfIL0dn5OHmfdvG8vWEjx49jJs1pIfwtijLWnrqWxaIRxlI-wCGRktG25m5IUT3vYjmTKXia5GAGFjAk3_3OFQNyNzu4vtWgcBv3mueE"/>
+<div>
+<p class="font-bold text-on-surface">Dr. Michael Chen</p>
+<p class="text-on-surface-variant text-[14px]">Cardiology Specialist</p>
+</div>
+</div>
+<button class="w-full py-xs bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-standard">View Details</button>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-sm rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-standard flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="bg-secondary-container text-on-secondary-container px-xs py-[2px] rounded-full text-[12px] font-bold">Video Call</div>
+<span class="text-on-surface-variant font-label-sm">Oct 26, 02:30 PM</span>
+</div>
+<div class="flex items-center gap-sm">
+<img alt="Doctor" class="w-12 h-12 rounded-lg object-cover" data-alt="A friendly female doctor with a stethoscope, looking directly at the camera with a reassuring expression. She is in a modern, light-filled office with medical equipment visible in the soft-focus background. The lighting is natural and bright, creating a clean, professional, and accessible health-oriented aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZNmbh8TeyDzvN8oLg6AtDw1RRW-i9nxSkqw_sjeFdSpZEZVnf4uSx4h7vKX4PSQqoCo2dJUcTTgUbP5hJqT3bZMrudUaYOSzn_0a1kveOeAWu3WSTvXdgbeCwTMymi0D0Gddm3t2HyYKShPHe1b1bvWMxkBKUnuR8SrKYqh1uRIvRLYGmkGduNsKMNiEq1-tQwzGpCrLoSbHEzufEg3ZUMRdFsOUAiXdPAzv-p2GIyb93QCz8yYoSXnoRb0_pjQXxuZSu7y3V6Sg"/>
+<div>
+<p class="font-bold text-on-surface">Dr. Sarah Williams</p>
+<p class="text-on-surface-variant text-[14px]">General Practitioner</p>
+</div>
+</div>
+<button class="w-full py-xs border border-primary text-primary rounded-lg font-bold hover:bg-primary-container hover:text-on-primary-container transition-standard">Check Connection</button>
+</div>
+</div>
+</section>
+<!-- History Table -->
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="p-md border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md">Medical History</h2>
+<button class="material-symbols-outlined text-on-surface-variant">filter_list</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-md py-sm font-label-sm text-on-surface-variant">Date</th>
+<th class="px-md py-sm font-label-sm text-on-surface-variant">Doctor</th>
+<th class="px-md py-sm font-label-sm text-on-surface-variant">Diagnosis</th>
+<th class="px-md py-sm font-label-sm text-on-surface-variant">Status</th>
+<th class="px-md py-sm font-label-sm text-on-surface-variant text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-standard">
+<td class="px-md py-md font-body-md">Sep 12, 2024</td>
+<td class="px-md py-md">Dr. Michael Chen</td>
+<td class="px-md py-md">Annual Check-up</td>
+<td class="px-md py-md"><span class="px-xs py-1 bg-surface-container-high text-on-surface-variant rounded text-xs font-bold uppercase tracking-wider">Completed</span></td>
+<td class="px-md py-md text-right"><button class="text-primary material-symbols-outlined">download</button></td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-standard">
+<td class="px-md py-md font-body-md">Aug 05, 2024</td>
+<td class="px-md py-md">Dr. Linda Gao</td>
+<td class="px-md py-md">Dermatology Scan</td>
+<td class="px-md py-md"><span class="px-xs py-1 bg-surface-container-high text-on-surface-variant rounded text-xs font-bold uppercase tracking-wider">Completed</span></td>
+<td class="px-md py-md text-right"><button class="text-primary material-symbols-outlined">download</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Column: AI Recommendations -->
+<div class="flex flex-col gap-lg">
+<section class="bg-surface-container-lowest border border-primary-container/30 rounded-xl p-md shadow-sm relative overflow-hidden">
+<!-- AI Sparkle Icon -->
+<div class="absolute top-sm right-sm text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="mb-md">
+<h2 class="font-headline-md text-headline-md text-primary">AI Insights</h2>
+<p class="text-on-surface-variant text-[14px]">Based on your recent health scans</p>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="p-sm bg-primary-fixed/20 border border-primary-container/20 rounded-lg">
+<p class="font-bold text-primary text-[14px]">Recommended Specialist</p>
+<div class="mt-xs flex items-center gap-sm">
+<img alt="AI Pick" class="w-10 h-10 rounded-full object-cover" data-alt="A close-up portrait of a female ophthalmologist in a professional clinical setting. She is wearing modern eyewear and a white coat, with a soft-focus laboratory background. The lighting is crisp and cool-toned, emphasizing medical precision and high-tech diagnostics. The overall mood is intelligent, expert, and trustworthy, fitting an AI-driven medical platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ853fWOyyq4HvhmxUKXRHoWyqI1qinlRugQ3wxaNNUxf9wGuQrrgE9Ur5CuHXWkUi1v7Q7hUerJZpl4ijKEZHK1awahDJgFJpoSiR3XodZL2yd_G-gGWiF3KzY9MBPwfiPJ40kvHaaW6epm5GavKMMl9ndan7i-vQPJMXAbGkYgcablpxbentXDHgcomiTxA9qOjMN58X9wbRN1zQBPB7LnIxGtvMuf1HfiTMCMLa_Dg8NInhyABE7P4OeBdong_EZTV-39FdD-c"/>
+<div>
+<p class="font-bold text-on-surface text-[14px]">Dr. Emily Stone</p>
+<div class="flex items-center gap-1 text-secondary font-bold text-[12px]">
+<span class="material-symbols-outlined text-xs">verified</span> 98% Match
+                                        </div>
+</div>
+</div>
+<div class="mt-sm flex flex-wrap gap-xs">
+<span class="px-xs py-1 bg-background rounded text-[10px] font-bold text-on-surface-variant">Ophthalmology</span>
+<span class="px-xs py-1 bg-background rounded text-[10px] font-bold text-on-surface-variant">Top Rated</span>
+</div>
+<button class="w-full mt-sm py-xs bg-primary text-on-primary rounded-lg font-bold text-[14px]">Book AI Choice</button>
+</div>
+<div class="p-sm bg-tertiary-fixed/30 rounded-lg border border-tertiary-container/10">
+<p class="font-bold text-tertiary text-[14px]">Health Tip</p>
+<p class="text-on-surface-variant text-[13px] mt-xs leading-snug">"Increasing your daily hydration could help with the fatigue symptoms you logged yesterday."</p>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="bg-surface border border-outline-variant rounded-xl p-md">
+<h3 class="font-bold text-on-surface mb-sm">Quick Actions</h3>
+<div class="grid grid-cols-2 gap-sm">
+<button class="flex flex-col items-center gap-xs p-sm bg-surface-container rounded-lg hover:bg-surface-container-high transition-standard">
+<span class="material-symbols-outlined text-primary">add_circle</span>
+<span class="text-[12px] font-bold">New Booking</span>
+</button>
+<button class="flex flex-col items-center gap-xs p-sm bg-surface-container rounded-lg hover:bg-surface-container-high transition-standard">
+<span class="material-symbols-outlined text-primary">pill</span>
+<span class="text-[12px] font-bold">Refill Rx</span>
+</button>
+<button class="flex flex-col items-center gap-xs p-sm bg-surface-container rounded-lg hover:bg-surface-container-high transition-standard">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="text-[12px] font-bold">Lab Results</span>
+</button>
+<button class="flex flex-col items-center gap-xs p-sm bg-surface-container rounded-lg hover:bg-surface-container-high transition-standard">
+<span class="material-symbols-outlined text-primary">help</span>
+<span class="text-[12px] font-bold">Ask AI Bot</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-inverse-surface mt-xl">
+<div class="w-full py-lg px-gutter max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start gap-md">
+<div class="flex flex-col gap-sm">
+<div class="font-display-lg text-headline-md font-bold text-on-primary">SmartDoc AI</div>
+<p class="text-inverse-on-surface max-w-xs font-body-md opacity-80">Empowering your health journey with advanced clinical intelligence and personalized care.</p>
+<div class="mt-sm inline-flex items-center gap-xs px-sm py-1 bg-surface/10 rounded-full text-on-primary text-xs font-bold border border-white/20">
+<span class="material-symbols-outlined text-sm">bolt</span> Powered by AI
+                </div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-lg">
+<div class="flex flex-col gap-xs">
+<span class="font-bold text-on-primary mb-xs">Platform</span>
+<a class="text-inverse-on-surface hover:text-secondary-fixed transition-standard font-body-md" href="#">About Us</a>
+<a class="text-inverse-on-surface hover:text-secondary-fixed transition-standard font-body-md" href="#">Contact</a>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="font-bold text-on-primary mb-xs">Legal</span>
+<a class="text-inverse-on-surface hover:text-secondary-fixed transition-standard font-body-md" href="#">Privacy Policy</a>
+<a class="text-inverse-on-surface hover:text-secondary-fixed transition-standard font-body-md" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="font-bold text-on-primary mb-xs">Help</span>
+<a class="text-inverse-on-surface hover:text-secondary-fixed transition-standard font-body-md" href="#">FAQ</a>
+<a class="text-inverse-on-surface hover:text-secondary-fixed transition-standard font-body-md" href="#">Support</a>
+</div>
+</div>
+</div>
+<div class="border-t border-white/10 py-md">
+<div class="max-w-container-max mx-auto px-gutter text-inverse-on-surface text-center font-label-sm opacity-60">
+                © 2024 SmartDoc AI. All rights reserved. Powered by AI.
+            </div>
+</div>
+</footer>
+</body></html>

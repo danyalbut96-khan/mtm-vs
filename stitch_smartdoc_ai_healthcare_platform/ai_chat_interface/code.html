@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartDoc AI - Chat Interface</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-primary-fixed-variant": "#004493",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#727785",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#1a73e8",
+                        "outline-variant": "#c1c6d6",
+                        "tertiary-container": "#c55500",
+                        "on-tertiary-fixed-variant": "#783100",
+                        "surface-dim": "#d7dae0",
+                        "surface-variant": "#dfe3e8",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#89fa9b",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#9e4300",
+                        "on-surface-variant": "#414754",
+                        "surface-tint": "#005bc0",
+                        "secondary-fixed-dim": "#6ddd81",
+                        "surface-container-high": "#e5e8ee",
+                        "on-surface": "#181c20",
+                        "on-primary-fixed": "#001a41",
+                        "primary": "#005bbf",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#86f898",
+                        "inverse-on-surface": "#eef1f7",
+                        "on-secondary-fixed-variant": "#005320",
+                        "inverse-primary": "#adc7ff",
+                        "background": "#f7f9ff",
+                        "on-secondary-fixed": "#002108",
+                        "surface-container-low": "#f1f4fa",
+                        "on-background": "#181c20",
+                        "surface-bright": "#f7f9ff",
+                        "on-primary-container": "#ffffff",
+                        "surface-container-highest": "#dfe3e8",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#adc7ff",
+                        "secondary": "#006e2c",
+                        "surface-container": "#ebeef4",
+                        "inverse-surface": "#2d3135",
+                        "on-secondary-container": "#00722f",
+                        "surface": "#f7f9ff",
+                        "on-tertiary-container": "#0e0200",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed": "#341100",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "1.5rem",
+                        "xs": "0.5rem",
+                        "sm": "1rem",
+                        "lg": "2.5rem",
+                        "xl": "4rem",
+                        "base": "4px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #dfe3e8; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #c1c6d6; }
+        .ai-shimmer {
+            background: linear-gradient(90deg, #1a73e8 0%, #adc7ff 50%, #1a73e8 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="bg-surface border-b border-outline-variant shadow-sm z-30">
+<div class="flex justify-between items-center h-[72px] px-gutter max-w-container-max mx-auto w-full">
+<div class="font-display-lg text-headline-md font-bold text-primary">SmartDoc AI</div>
+<nav class="hidden md:flex gap-md items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Find Doctor</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">For Doctors</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">AI Chat</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="px-sm py-xs text-primary font-medium hover:bg-primary-fixed-dim/20 rounded-lg transition-all">Login</button>
+<button class="px-sm py-xs bg-primary text-on-primary font-medium rounded-lg hover:brightness-110 active:scale-95 transition-all">Signup</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 max-w-container-max mx-auto w-full flex overflow-hidden p-gutter gap-md">
+<!-- Left Sidebar: Conversations List -->
+<aside class="w-full md:w-80 lg:w-96 flex flex-col bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.05)]">
+<div class="p-sm bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-primary">Messages</h2>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-xs rounded-full transition-colors">edit_square</button>
+</div>
+<div class="p-sm">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-xs bg-surface-container rounded-full border-none focus:ring-2 focus:ring-primary-container/30 text-body-md" placeholder="Search conversations..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<!-- AI Assistant Item -->
+<div class="px-sm py-md flex items-center gap-sm cursor-pointer hover:bg-surface-container-low transition-colors border-l-4 border-primary bg-primary-container/5">
+<div class="relative">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-weight="fill">smart_toy</span>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-surface"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<span class="font-bold text-on-surface truncate">AI Medical Assistant</span>
+<span class="text-[12px] text-outline">Just now</span>
+</div>
+<p class="text-sm text-primary font-medium truncate">Analyzing your symptoms...</p>
+</div>
+</div>
+<!-- Chat Item 1 -->
+<div class="px-sm py-md flex items-center gap-sm cursor-pointer hover:bg-surface-container-low transition-colors border-l-4 border-transparent">
+<img alt="Dr. Sarah Mitchell" class="w-12 h-12 rounded-full object-cover" data-alt="A professional portrait of a female doctor in a white lab coat with a stethoscope around her neck. She has a friendly, reassuring smile. The background is a clean, bright clinic hallway with soft daylight, reflecting a professional medical environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz58d2uVTYPahikv8kuRj2wSlUptfd-Dq_z3gywb716ysICBMB5zMRP7oii9gKYHBbLJyG2RYJ7tNvSAGVXdI5_k4G4Ges-wrYLqbmxUVlORAffPDPnB_jvoAFPDEWNZ_rWHFf5O5HJjV2EMWOlT6nVZY_4SWs26Y3w_KqHzUf5AMox7MHlh6cz3Xld9juQKIedtVJtgbdsvg6KkuqEaNH3062GpRW4Eg1gJ0ZB-fuFtEynNnaFRIlc_42TcJlCPTmMys2YHXP04M"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<span class="font-bold text-on-surface truncate">Dr. Sarah Mitchell</span>
+<span class="text-[12px] text-outline">10:45 AM</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate">Your lab results look promising. Let's schedule a follow-up.</p>
+</div>
+</div>
+<!-- Chat Item 2 -->
+<div class="px-sm py-md flex items-center gap-sm cursor-pointer hover:bg-surface-container-low transition-colors border-l-4 border-transparent">
+<img alt="Dr. James Wilson" class="w-12 h-12 rounded-full object-cover" data-alt="A middle-aged male doctor with glasses and a kind expression, wearing a navy blue scrub top. He is looking directly at the camera in a modern hospital setting with blurred medical monitors in the background. High-key lighting conveys clinical precision and accessibility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPF6Xx75enkGpEWak574q-mrlTbSEIl5UWvQKBfvsz1BkKsaWA9EIYsVJmQIW8Wb0vHRVRfdUSoweH_buYI3neLu6S5FBbLPFREoWXsrRwLhmx8VgVblV1qRVqngBznwihl-4kB_UV0Wzrsre-AIxQoBDiKu3OQiboRvQgAmyMas2QdV8fnRHsEcjhxTECI8NdtO-EwrQsxejB_u6pf2Zj74rc5eAsFAG3ye65oUBoo3x9YinKzqyHIRXis8kccix1pZsjP3RK3No"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<span class="font-bold text-on-surface truncate">Dr. James Wilson</span>
+<span class="text-[12px] text-outline">Yesterday</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate">The prescription has been sent to your pharmacy.</p>
+</div>
+</div>
+<!-- Chat Item 3 -->
+<div class="px-sm py-md flex items-center gap-sm cursor-pointer hover:bg-surface-container-low transition-colors border-l-4 border-transparent">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">health_and_safety</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<span class="font-bold text-on-surface truncate">Patient Care Team</span>
+<span class="text-[12px] text-outline">Mon</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate">Thank you for your inquiry about the insurance coverage.</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right: Active Chat Window -->
+<section class="flex-1 flex flex-col bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.05)] relative">
+<!-- Chat Header -->
+<header class="h-[72px] px-md flex items-center justify-between border-b border-outline-variant bg-surface-container-lowest">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-weight="fill">smart_toy</span>
+</div>
+<div>
+<div class="flex items-center gap-xs">
+<h3 class="font-bold text-on-surface">AI Medical Assistant</h3>
+<span class="flex items-center gap-[2px] bg-primary/10 px-xs py-[2px] rounded-full">
+<span class="material-symbols-outlined text-[12px] text-primary" data-weight="fill">auto_awesome</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-wider">AI Powered</span>
+</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+<span class="text-[12px] text-secondary font-medium">Online</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-xs rounded-full">videocam</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-xs rounded-full">call</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-xs rounded-full">info</button>
+</div>
+</header>
+<!-- Chat Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-md flex flex-col gap-md bg-[#fdfdff]">
+<div class="flex justify-center my-sm">
+<span class="px-sm py-[2px] bg-surface-container text-outline text-[12px] rounded-full uppercase font-medium">Today</span>
+</div>
+<!-- Received Message (AI) -->
+<div class="flex gap-sm max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-on-primary-container mt-2">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">smart_toy</span>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="bg-surface-container-low p-md rounded-2xl rounded-tl-none border border-outline-variant shadow-sm">
+<p class="text-body-md text-on-surface">Hello! I'm your SmartDoc AI assistant. How can I help you today? I can help you understand lab results, suggest doctors based on symptoms, or explain medical terms.</p>
+</div>
+<span class="text-[11px] text-outline ml-1">09:15 AM</span>
+</div>
+</div>
+<!-- Sent Message (User) -->
+<div class="flex gap-sm max-w-[85%] self-end flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex-shrink-0 flex items-center justify-center text-on-surface-variant mt-2 overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of a young adult man with a modern hairstyle and a friendly expression. He is wearing a simple casual grey shirt. The lighting is natural and bright, set against a blurred urban apartment interior backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_pIyhpVyaW4q0rm7mPuumVgImh3r4W5KYH8aNG-ImafUFI4tt3MDJCwtQtK2JSeczQRIAr5fRrknLffZfCAA5j2040Xi275p0F4VlGfgkMJKUTOnrVkhN4mV5yzVWDQw3WlWBdv23jzyBwmfakmo1d1g0m6hlPsJ2mu8f8roa6T51xWipud-ZO--qqv0nSEXC7zbMixfUUttKFUcDXUVrXGtVwN8weU1kmrbiKitONtLMRtU8ykWiu6uOOXw3JiyBISXoeeD9Iq0"/>
+</div>
+<div class="flex flex-col items-end gap-xs">
+<div class="bg-primary text-on-primary p-md rounded-2xl rounded-tr-none shadow-md">
+<p class="text-body-md">I've been feeling some mild chest tightness after climbing stairs. Should I be concerned?</p>
+</div>
+<span class="text-[11px] text-outline mr-1">09:16 AM • Read</span>
+</div>
+</div>
+<!-- Received Message (AI with specific "Thinking" state) -->
+<div class="flex gap-sm max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-on-primary-container mt-2">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">smart_toy</span>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="bg-surface-container-low p-md rounded-2xl rounded-tl-none border border-outline-variant shadow-sm relative overflow-hidden">
+<!-- Subtle AI Sparkle/Glow -->
+<div class="absolute top-0 right-0 p-xs">
+<span class="material-symbols-outlined text-primary/30 text-[16px] animate-pulse">auto_awesome</span>
+</div>
+<p class="text-body-md text-on-surface mb-md">Chest tightness (angina-like symptoms) during physical exertion like climbing stairs warrants a professional evaluation. This could be related to your heart's oxygen supply during exercise.</p>
+<!-- AI Generated Insight Card -->
+<div class="bg-white rounded-lg border border-primary/20 p-sm flex flex-col gap-xs shadow-sm">
+<div class="flex items-center gap-xs mb-1">
+<span class="material-symbols-outlined text-primary text-[20px]">recommend</span>
+<span class="text-sm font-bold text-primary ai-shimmer">AI Recommended Action</span>
+</div>
+<p class="text-[13px] text-on-surface-variant">I suggest booking an appointment with a cardiologist for a stress test and EKG.</p>
+<div class="flex gap-xs mt-1">
+<span class="px-xs py-[2px] bg-primary/5 text-primary text-[10px] rounded-full border border-primary/10 font-bold uppercase">Priority: High</span>
+<span class="px-xs py-[2px] bg-secondary-container/30 text-secondary text-[10px] rounded-full border border-secondary/10 font-bold uppercase">Condition: Exertional</span>
+</div>
+</div>
+</div>
+<span class="text-[11px] text-outline ml-1">09:17 AM</span>
+</div>
+</div>
+<!-- Received Message (Typing State) -->
+<div class="flex gap-sm items-center">
+<div class="w-8 h-8 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">smart_toy</span>
+</div>
+<div class="bg-surface-container-low px-sm py-xs rounded-full border border-outline-variant flex gap-1">
+<div class="w-1.5 h-1.5 bg-outline rounded-full animate-bounce"></div>
+<div class="w-1.5 h-1.5 bg-outline rounded-full animate-bounce [animation-delay:0.2s]"></div>
+<div class="w-1.5 h-1.5 bg-outline rounded-full animate-bounce [animation-delay:0.4s]"></div>
+</div>
+</div>
+</div>
+<!-- Chat Input Area -->
+<footer class="p-md bg-surface-container-lowest border-t border-outline-variant">
+<div class="max-w-4xl mx-auto flex items-end gap-sm">
+<div class="flex-1 bg-surface-container rounded-2xl border border-outline-variant focus-within:ring-2 focus-within:ring-primary-container/30 transition-all flex items-end p-xs">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-sm rounded-full transition-colors">add_circle</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-body-md py-sm resize-none custom-scrollbar max-h-32" placeholder="Describe your symptoms or ask a medical question..." rows="1"></textarea>
+<div class="flex items-center">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-sm rounded-full transition-colors">mood</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-sm rounded-full transition-colors">mic</button>
+</div>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-2xl flex items-center justify-center hover:brightness-110 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined" data-weight="fill">send</span>
+</button>
+</div>
+<div class="text-center mt-sm">
+<p class="text-[11px] text-outline">SmartDoc AI provides guidance, not diagnosis. In an emergency, call your local emergency number.</p>
+</div>
+</footer>
+</section>
+</main>
+<!-- Footer Block (Optional Shell Element) -->
+<footer class="hidden md:block bg-inverse-surface py-md px-gutter">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="font-display-lg text-headline-md font-bold text-on-primary">SmartDoc AI</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="text-inverse-on-surface hover:text-secondary-fixed text-sm transition-colors" href="#">Privacy Policy</a>
+<a class="text-inverse-on-surface hover:text-secondary-fixed text-sm transition-colors" href="#">Terms of Service</a>
+<a class="text-inverse-on-surface hover:text-secondary-fixed text-sm transition-colors" href="#">Support</a>
+</div>
+<div class="flex items-center gap-xs">
+<span class="text-inverse-on-surface text-sm opacity-80">© 2024 SmartDoc AI. Powered by AI.</span>
+<span class="material-symbols-outlined text-secondary-fixed text-sm">bolt</span>
+</div>
+</div>
+</footer>
+</body></html>

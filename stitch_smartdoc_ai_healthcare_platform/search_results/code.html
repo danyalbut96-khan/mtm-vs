@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Search Results | SmartDoc AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#ffdbcb",
+                      "on-primary-fixed-variant": "#004493",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#727785",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#1a73e8",
+                      "outline-variant": "#c1c6d6",
+                      "tertiary-container": "#c55500",
+                      "on-tertiary-fixed-variant": "#783100",
+                      "surface-dim": "#d7dae0",
+                      "surface-variant": "#dfe3e8",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#89fa9b",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#9e4300",
+                      "on-surface-variant": "#414754",
+                      "surface-tint": "#005bc0",
+                      "secondary-fixed-dim": "#6ddd81",
+                      "surface-container-high": "#e5e8ee",
+                      "on-surface": "#181c20",
+                      "on-primary-fixed": "#001a41",
+                      "primary": "#005bbf",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "error-container": "#ffdad6",
+                      "secondary-container": "#86f898",
+                      "inverse-on-surface": "#eef1f7",
+                      "on-secondary-fixed-variant": "#005320",
+                      "inverse-primary": "#adc7ff",
+                      "background": "#f7f9ff",
+                      "on-secondary-fixed": "#002108",
+                      "surface-container-low": "#f1f4fa",
+                      "on-background": "#181c20",
+                      "surface-bright": "#f7f9ff",
+                      "on-primary-container": "#ffffff",
+                      "surface-container-highest": "#dfe3e8",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#adc7ff",
+                      "secondary": "#006e2c",
+                      "surface-container": "#ebeef4",
+                      "inverse-surface": "#2d3135",
+                      "on-secondary-container": "#00722f",
+                      "surface": "#f7f9ff",
+                      "on-tertiary-container": "#0e0200",
+                      "primary-fixed": "#d8e2ff",
+                      "on-tertiary-fixed": "#341100",
+                      "on-error": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "1.5rem",
+                      "xs": "0.5rem",
+                      "sm": "1rem",
+                      "lg": "2.5rem",
+                      "xl": "4rem",
+                      "gutter": "24px",
+                      "base": "4px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Manrope"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "label-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .doctor-card-shadow { box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05); transition: all 0.2s ease-in-out; }
+        .doctor-card-shadow:hover { box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface-container-low border-b border-outline-variant dark:border-outline shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center h-[72px] px-gutter max-w-container-max mx-auto w-full">
+<div class="flex items-center gap-md">
+<span class="font-display-lg text-headline-md font-bold text-primary dark:text-inverse-primary">SmartDoc AI</span>
+<nav class="hidden md:flex items-center gap-md ml-lg">
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200" href="#">Home</a>
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary dark:border-inverse-primary pb-1 font-body-md" href="#">Find Doctor</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200" href="#">For Doctors</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm">
+<button class="px-sm py-xs text-primary font-bold hover:bg-primary/10 rounded-lg transition-all active:opacity-80 active:scale-95">Login</button>
+<button class="bg-primary-container text-on-primary-container px-md py-xs font-bold rounded-lg hover:brightness-110 transition-all active:opacity-80 active:scale-95">Signup</button>
+</div>
+</div>
+</header>
+<main class="flex-grow max-w-container-max mx-auto w-full px-gutter py-lg">
+<!-- Search Header Area -->
+<div class="mb-lg space-y-md">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div class="flex-grow max-w-2xl">
+<label class="block text-label-sm text-on-surface-variant mb-xs">Search for doctors, clinics or specialties</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface border border-outline-variant rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-body-md" placeholder="Search..." type="text" value="Cardiologist in New York"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<span class="text-label-sm text-on-surface-variant whitespace-nowrap">Sort by:</span>
+<select class="bg-surface border border-outline-variant rounded-lg px-sm py-xs text-body-md focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none">
+<option>Rating (High to Low)</option>
+<option>Availability (Soonest)</option>
+<option>Experience (Years)</option>
+</select>
+</div>
+</div>
+<div class="flex items-center justify-between border-b border-outline-variant pb-xs">
+<h2 class="font-headline-md text-on-surface">128 Specialized Results</h2>
+<button class="md:hidden flex items-center gap-xs text-primary font-bold">
+<span class="material-symbols-outlined">filter_list</span> Filters
+                </button>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-lg">
+<!-- Sidebar Filters -->
+<aside class="hidden md:block w-64 flex-shrink-0 space-y-lg">
+<section class="space-y-sm">
+<h3 class="font-bold text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">stethoscope</span>
+                        Specialization
+                    </h3>
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-sm py-xs text-body-md">
+<option>Cardiology</option>
+<option>Dermatology</option>
+<option>Neurology</option>
+<option>Pediatrics</option>
+</select>
+</section>
+<section class="space-y-sm">
+<h3 class="font-bold text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                        City
+                    </h3>
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-sm py-xs text-body-md">
+<option>New York</option>
+<option>Los Angeles</option>
+<option>Chicago</option>
+<option>Houston</option>
+</select>
+</section>
+<section class="space-y-sm">
+<h3 class="font-bold text-on-surface">Consultation Type</h3>
+<div class="flex p-base bg-surface-container rounded-xl">
+<button class="flex-1 py-xs text-label-sm rounded-lg bg-primary text-white font-bold">Online</button>
+<button class="flex-1 py-xs text-label-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors">Physical</button>
+</div>
+</section>
+<section class="space-y-sm">
+<h3 class="font-bold text-on-surface">Availability</h3>
+<div class="space-y-xs">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Available Today</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Available this Weekend</span>
+</label>
+</div>
+</section>
+<section class="pt-md border-t border-outline-variant">
+<button class="w-full py-sm rounded-xl border border-primary text-primary font-bold hover:bg-primary/5 transition-colors">Clear All Filters</button>
+</section>
+</aside>
+<!-- Grid of Doctor Cards -->
+<div class="flex-grow grid grid-cols-1 xl:grid-cols-2 gap-md">
+<!-- Doctor Card 1 -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md doctor-card-shadow flex flex-col sm:flex-row gap-md">
+<div class="relative flex-shrink-0">
+<img class="w-24 h-24 sm:w-32 sm:h-32 rounded-xl object-cover" data-alt="A professional headshot of a female doctor in a crisp white lab coat, smiling warmly in a bright, modern medical office. The lighting is soft and natural, emphasizing a clean light-mode aesthetic. Her expertise is conveyed through her confident posture against a minimalist, high-tech clinical background with subtle blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK8WKJzCuCh-q-eU3pOG6kHzCTD3tezPtDF8PcwpmNxdNIj4p9v-I8GxyKb9W_wbwH0uMXtEasacEsedJcyMNHOuJGbbpWCO6A7-QW2BX8M6eWM935uIzCb3BX10ip-8958baq_AGyiOfdfurLT393NtMYkgyAim2u3IINPQaIEpquqvBz63rFcbti2mBiBR_C5NlLyNRyQ6lscnGoaclzGt3_6AHkGrcZJ5jtSjAUHcuAQnr9Pb11Ewlbvb6W96RiuPeeOdlzMpo"/>
+<div class="absolute -bottom-2 -right-2 bg-secondary-container text-on-secondary-container px-sm py-base rounded-full text-label-sm font-bold flex items-center gap-xs shadow-sm">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+                            Available
+                        </div>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h3 class="font-headline-md text-on-surface">Dr. Sarah Mitchell</h3>
+<div class="flex items-center gap-sm mt-xs">
+<span class="px-sm py-base bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-sm font-bold">Cardiology</span>
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span> New York, NY
+                                        </span>
+</div>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-high px-sm py-base rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface text-label-sm">4.9</span>
+</div>
+</div>
+<div class="flex gap-sm mt-sm">
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">videocam</span> Online
+                                </span>
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">home_health</span> Physical
+                                </span>
+</div>
+</div>
+<div class="flex items-center gap-sm mt-md">
+<button class="flex-grow bg-primary text-white py-sm rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all">Book Appointment</button>
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Doctor Card 2 -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md doctor-card-shadow flex flex-col sm:flex-row gap-md">
+<div class="relative flex-shrink-0">
+<img class="w-24 h-24 sm:w-32 sm:h-32 rounded-xl object-cover" data-alt="A focused portrait of a male specialist doctor wearing a navy blue stethoscope, set against a blurred, high-end medical clinic background. The image uses a clean, corporate color palette with deep blues and whites. Lighting is professional and bright, highlighting a sense of competence and modern healthcare technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATPPOs9DapWCeR1NAjsiWaLMto88XBaPyE21XoO2LgdswWwcC9sJJwiVGWgBWQJ9p1id0xlk1ldyygdS2T5EtZQ-RcTYzcTOgMRPvLwMJzjml2keqVyuX715fZqjWA2_M7J25NRI_8BSmWr95rpaG_XpW24d5MJipEbrKNXvSCQu_2ok15SNkkk-KCdbzFYWoAYRL_Fv3bzOGjw84yyWgN9bhs0Q5hhq6JAgy0aHJ4XnZ4ZtF9TjM-_YAl3e17CeLSHaJsxM2xnKw"/>
+<div class="absolute -bottom-2 -right-2 bg-surface-container-highest text-on-surface-variant px-sm py-base rounded-full text-label-sm font-bold flex items-center gap-xs shadow-sm">
+<span class="w-2 h-2 bg-outline rounded-full"></span>
+                            Next: Mon
+                        </div>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h3 class="font-headline-md text-on-surface">Dr. James Chen</h3>
+<div class="flex items-center gap-sm mt-xs">
+<span class="px-sm py-base bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-sm font-bold">Dermatology</span>
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span> New York, NY
+                                        </span>
+</div>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-high px-sm py-base rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface text-label-sm">4.7</span>
+</div>
+</div>
+<div class="flex gap-sm mt-sm">
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">videocam</span> Online
+                                </span>
+</div>
+</div>
+<div class="flex items-center gap-sm mt-md">
+<button class="flex-grow bg-primary text-white py-sm rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all">Book Appointment</button>
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Doctor Card 3 -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md doctor-card-shadow flex flex-col sm:flex-row gap-md">
+<div class="relative flex-shrink-0">
+<img class="w-24 h-24 sm:w-32 sm:h-32 rounded-xl object-cover" data-alt="A portrait of an experienced female physician in a modern, light-filled consultation room. She is looking towards the camera with a reassuring expression. The setting features sleek white surfaces and medical equipment in the background, styled with a clinical and professional aesthetic emphasizing trust and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN5FR5crIEgxYwTDLkSdzElxy84fdaHH0LLeKPoJ0rn4HktFrXFBDYAzp_WNY9f-_dIY1BQ3kL73r5C1rl6JMrKMMi2q_9X54kz3dvjUBIYzN3KfJl7KtbpT9yt2ONgmmJuhequFdh7eGb7h7u9olFLvonI_RMWWNqLjR9UMDsdOYSqd4oHWzNLNLEMwoxF4Gsx7t7wJQkvNbS8eK9LM4IV4FuuUQYP8nPNk1UgDkLdmy2Vk3MQ32Izn0GbYvWeu6driWbXxcSI4U"/>
+<div class="absolute -bottom-2 -right-2 bg-secondary-container text-on-secondary-container px-sm py-base rounded-full text-label-sm font-bold flex items-center gap-xs shadow-sm">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+                            Available
+                        </div>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h3 class="font-headline-md text-on-surface">Dr. Elena Rodriguez</h3>
+<div class="flex items-center gap-sm mt-xs">
+<span class="px-sm py-base bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-sm font-bold">Neurology</span>
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span> Queens, NY
+                                        </span>
+</div>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-high px-sm py-base rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface text-label-sm">5.0</span>
+</div>
+</div>
+<div class="flex gap-sm mt-sm">
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">home_health</span> Physical
+                                </span>
+</div>
+</div>
+<div class="flex items-center gap-sm mt-md">
+<button class="flex-grow bg-primary text-white py-sm rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all">Book Appointment</button>
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Doctor Card 4 (AI Recommended Style) -->
+<div class="bg-surface border-2 border-primary/20 rounded-xl p-md doctor-card-shadow flex flex-col sm:flex-row gap-md relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-white px-md py-base rounded-bl-xl text-label-sm font-bold flex items-center gap-xs z-10">
+<span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+                        AI Match
+                    </div>
+<div class="relative flex-shrink-0">
+<img class="w-24 h-24 sm:w-32 sm:h-32 rounded-xl object-cover" data-alt="Professional headshot of a male doctor with a kind face, dressed in a contemporary grey lab coat. The background is a blurred high-tech medical research lab with soft blue lighting. The overall mood is high-tech yet human-centric, aligning with an AI-assisted healthcare platform aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiZ_eqMD0nAj7yvSPFWP8FrQtbs3c3q0xlcVAhItbupPKYbdqicWBZcmzsFGukePl_Tp0VaC7cPXdHSHxCw4XH4phRF9aV7wmcKMd9KNzeCuTL8aeihCupHqKrB7J40QBWBeMSlbHgNVPTruw3mwiq5PHM1MpSjShkAHW4lVDSrQmunv6wFM2au4Fx1TcLF-207zkAYt97znpRkU_a6bYkY8hEYRlscOG2JYfMRa-b2Yt7iifm-9FpyDMP_-iZiMVWtDBakSGSWfE"/>
+<div class="absolute -bottom-2 -right-2 bg-secondary-container text-on-secondary-container px-sm py-base rounded-full text-label-sm font-bold flex items-center gap-xs shadow-sm">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+                            Available
+                        </div>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h3 class="font-headline-md text-on-surface">Dr. Michael Foster</h3>
+<div class="flex items-center gap-sm mt-xs">
+<span class="px-sm py-base bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-sm font-bold">Cardiology</span>
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span> New York, NY
+                                        </span>
+</div>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-high px-sm py-base rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface text-label-sm">4.8</span>
+</div>
+</div>
+<div class="flex gap-sm mt-sm">
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">videocam</span> Online
+                                </span>
+<span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">home_health</span> Physical
+                                </span>
+</div>
+</div>
+<div class="flex items-center gap-sm mt-md">
+<button class="flex-grow bg-primary text-white py-sm rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all">Book Appointment</button>
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-xl flex justify-center items-center gap-sm">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container transition-colors">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container transition-colors">12</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest w-full mt-xl">
+<div class="w-full py-lg px-gutter max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start gap-md">
+<div class="space-y-sm max-w-sm">
+<span class="font-display-lg text-headline-md font-bold text-on-primary dark:text-primary">SmartDoc AI</span>
+<p class="text-inverse-on-surface dark:text-on-surface-variant text-body-md">Connecting patients with expert healthcare professionals through secure, AI-driven diagnostics and virtual consultations.</p>
+<div class="pt-sm">
+<span class="inline-flex items-center gap-xs px-sm py-base rounded-full bg-primary/10 border border-primary/20 text-on-primary font-bold text-label-sm">
+<span class="material-symbols-outlined text-[16px]">auto_awesome</span> Powered by AI
+                    </span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-xl">
+<div class="space-y-sm">
+<h4 class="text-secondary-fixed dark:text-secondary font-bold">Company</h4>
+<nav class="flex flex-col gap-xs">
+<a class="text-inverse-on-surface dark:text-on-surface-variant hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">About Us</a>
+<a class="text-inverse-on-surface dark:text-on-surface-variant hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">Contact</a>
+<a class="text-inverse-on-surface dark:text-on-surface-variant hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">Support</a>
+</nav>
+</div>
+<div class="space-y-sm">
+<h4 class="text-secondary-fixed dark:text-secondary font-bold">Legal</h4>
+<nav class="flex flex-col gap-xs">
+<a class="text-inverse-on-surface dark:text-on-surface-variant hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-inverse-on-surface dark:text-on-surface-variant hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">Terms of Service</a>
+</nav>
+</div>
+<div class="space-y-sm">
+<h4 class="text-secondary-fixed dark:text-secondary font-bold">Resources</h4>
+<nav class="flex flex-col gap-xs">
+<a class="text-inverse-on-surface dark:text-on-surface-variant hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">FAQ</a>
+<a class="text-inverse-on-surface dark:text-on-surface-variant hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">Blog</a>
+</nav>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter py-md border-t border-white/10">
+<p class="text-inverse-on-surface dark:text-on-surface-variant text-label-sm opacity-60">© 2024 SmartDoc AI. All rights reserved. Powered by AI.</p>
+</div>
+</footer>
+</body></html>
